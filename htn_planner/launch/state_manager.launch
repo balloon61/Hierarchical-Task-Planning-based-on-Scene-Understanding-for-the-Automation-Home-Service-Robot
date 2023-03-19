@@ -1,0 +1,6 @@
+<launch>
+
+
+    <node pkg="htn_planner" type="state_manager.py" name="state_manager"/>
+    <!--node pkg="htn_planner" type="executor.py" name="executor"/-->
+</launch>
