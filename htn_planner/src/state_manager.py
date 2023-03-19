@@ -26,14 +26,17 @@ except:  # For Python 2 compatibility
     from math import pi, fabs, cos, sqrt
 
 
+
+
+
+
 class State_Manager:
     def __init__(self) -> None:
         # move_base_msgs/MoveBaseActionResult
         rospy.Subscriber("/move_base/result", MoveBaseActionResult, self.move_base_goal_reach_callback)
         rospy.Subscriber("gui_command", String, self.input_callback)
+        self.pub = rospy.Publisher('action', action_msg, queue_size=1)
         # Construct Robot object
-        self.Robot = ROBOT()
-
 
         self.current_state = gtpyhop.State('Home_Service_initial_state')
         self.action_list = list() # this list is used for stored the action genersted from gtpyhop
@@ -60,6 +63,9 @@ class State_Manager:
 
         self.reach_goal = False
         self.current_action = None
+
+        self.Robot = ROBOT()
+
         # Scene Understangind initial state
         # Test Function State
         # self.current_state.pos = {'robot': 'loc0', 'door': 'door', 'trash_can':'trash_can'}
@@ -89,6 +95,7 @@ class State_Manager:
 
     # call back function, get the gui input
     def input_callback(self, task)->None:
+        ########################################################################
         rospy.loginfo("Task: %s", task.data)
         act, item = task.data.split()
         # If the input is in the task list, then execute the input command
@@ -124,7 +131,7 @@ class State_Manager:
                     self.current_action = self.action_list.pop(0)
                     action_type, action_destination = self.current_action
                     self.reach_goal = False
-
+        ########################################################################
 
         # try:
         #     print(self.action_list)
@@ -164,8 +171,7 @@ class State_Manager:
         # return goal
 
     def action_publisher(self, plan_act:String, plan_des:String, plan_item:String)->None:
-        pub = rospy.Publisher('action', action_msg, queue_size=1)
-        rate = rospy.Rate(1)
+        self.pub = rospy.Publisher('action', action_msg, queue_size=1)
         msg = action_msg()
 
         while not rospy.is_shutdown():
@@ -173,9 +179,8 @@ class State_Manager:
             msg.destination = plan_des
             msg.item = plan_item
             print(msg)
-            pub.publish(msg)
-            rate.sleep()
-
+            self.pub.publish(msg)
+            rospy.sleep(1.0)
 
     # not tested
     def state_update(self, current_state, act):
@@ -198,10 +203,6 @@ class State_Manager:
             if goal[2] == current_state.holding[goal[1]]:
                 return True
         return False
-    
-
-    def Scene_Understanding_to_State(self):
-        return None
 
 
 
@@ -209,7 +210,6 @@ if __name__=="__main__":
 
     rospy.init_node('State_Manager_Node', anonymous = True)
     gtpyhop.current_domain = the_domain
-
     gtpyhop.print_domain()
 
     S_M = State_Manager()
