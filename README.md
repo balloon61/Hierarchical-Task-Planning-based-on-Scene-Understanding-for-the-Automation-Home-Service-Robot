@@ -130,7 +130,7 @@ roslaunch darknet_ros yolo.launch
 2. Use octomap to generate a collision free path
 3. Use Jacobian to control our robot
 
-## Demp
+## Demo
 ```
 ```
 ### Video
