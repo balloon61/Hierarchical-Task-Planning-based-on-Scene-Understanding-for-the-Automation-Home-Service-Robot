@@ -11,10 +11,6 @@ https://github.com/dananau/GTPyhop
 
 https://github.com/kivy/kivy
 
-http://wiki.ros.org/octomap_server
-
-http://wiki.ros.org/move_base
-
 
 The package is only tested in the ROS Noetic 20.04, Gazebo 11, opencv 4.2.0.
 The following instructions assume that you are already have the appropriate version of all software mentioned above (ROS, Gazebo, ...), and also install Rviz, move base, and Octomap.
