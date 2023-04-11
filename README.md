@@ -111,7 +111,7 @@ rosrun htn_planner state_manager.py
 ```
 For example, input: clean table
 
-plan [('move', 'trash_can'), ('open', 'trash_can'), ('move', 'table'), ('pickup', 'cola', 'table'), ('move', 'trash_can'), ('put', 'cola', 'trash_can'), ('move', 'table'), ('pickup', 'dish', 'table'), ('move', 'drain'), ('put', 'dish', 'drain')]
+### plan [('move', 'trash_can'), ('open', 'trash_can'), ('move', 'table'), ('pickup', 'cola', 'table'), ('move', 'trash_can'), ('put', 'cola', 'trash_can'), ('move', 'table'), ('pickup', 'dish', 'table'), ('move', 'drain'), ('put', 'dish', 'drain')]
 
 Note that in this example, we know that the cola and the dish is on the table, and the trash can is closed. But these state is supposed to obtain from our scene understanding algorithm, we will discuss about how we get the state in the next section.
 
