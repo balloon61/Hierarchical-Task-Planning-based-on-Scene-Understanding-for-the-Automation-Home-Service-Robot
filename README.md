@@ -31,7 +31,7 @@ To run the environment, you need to make sure that the model has beed added to t
 
 ```
 # Open a terminal and type
-export GAZEBO_MODEL_PATH=~/MindHome/src/mm3/models:${GAZEBO_MODEL_PATH}
+export GAZEBO_MODEL_PATH=~/{WS_NAME}/src/mm3/models:${GAZEBO_MODEL_PATH}
 
 # Or you can just add this line to your .bashrc file
 vim ~/.bashrc 
